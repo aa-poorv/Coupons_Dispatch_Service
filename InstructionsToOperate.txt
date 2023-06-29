@@ -1,0 +1,68 @@
+SetUp
+
+Step 1: Operated in Visual studio Code
+
+Step 2: Run (npm install) to install all requires modules
+
+Step 3: Used Mongo Db database so it should be installed in your computer.
+
+Operations:-
+1) Authentication
+
+Step 1: To start the server run (nodemon index.js) in terminal
+
+Step 2: install Thunderclient extension in visual studio code/Postman.
+
+step 3: Open new request in thunderclient now test GET request http://localhost:3000/ to check if everything is running perfectly
+
+Step 4: Now to register a user POST request http://localhost:3000/users/register and add your username and password in BODY>JSON section
+in given format and then send the request.
+{
+  "username": "aa_poorv",
+  "password": "ap12345"
+}
+
+Step 5: Now at response window you can see access token, Copy that access token.
+
+Step 6: Now send GET request http://localhost:3000/users/secret or http://localhost:3000/users/topsecret and paste the copied access token at Auth > Bearer section.
+
+Step 7: You can access that url for 10 minute as access token expires after that So to get new access token Again send a POST request at
+http://localhost:3000/users/refresh-token now again a new access token can be seen at the response part that can be used to access http://localhost:3000/users/secret
+and http://localhost:3000/users/topsecret(need to be Admin to access) like in step 6.
+
+Step 8: We will send POST request at http://localhost:3000/users/logout to logout the user. Now you will not be able to perform Step 7 that is to get new access token
+
+Step 9: Now Again to login the user we will send POST request to http://localhost:3000/users/login and  at section BODY>JSON paste the username and password like in 
+Step 4, You will see access token at the response screen that you can copy to peform Step 6. and when access token expires again perform step 7
+
+2) Authorization
+
+Step 1: Any user that is registered its default user role defined is (User: 2001) so to add other roles to a user, add roles property manually with given values
+{
+  Admin: 5150,
+  Editor: 1984,
+  User: 2001,
+}
+Step 2: Presently for coupon api's roles required for creation are (Admin, Editor), for updates are(Admin, Editor), viewing(User, Admin, Editor) and Delete(Admin).
+Step 3: Edit Allowed user roles in routes>coupon.js file
+
+3) Coupons
+
+Step 1: First Login and get access token for further process. 
+Step 2: Create a coupon with post request  http://localhost:3000/coupon/create/:id here id is the user's id for which we are creating Coupons, paste name 
+and discount in body section , whereas paste access token in Auth>bearer section.
+{
+  "name": "Couple discount",
+  "discount": 60
+}
+this coupon will be availble for 20 minutes. then will be deleted automatically.
+
+Step 3: Updating a coupon with patch request http://localhost:3000/coupon/update/:id here id is Coupon id that is to be updated with body section has name or
+discount or both whichever property has to be updated and paste access token in bearer section.
+
+step 4: View all coupon send get request http://localhost:3000/coupon/showAll and paste access token in bearer section.
+
+Step 5: View all coupons related to specific user send get request http://localhost:3000/coupon/show/:id here id is id of user. Paste access token in bearer section.
+
+Step 6: Delete coupon we send delete request http://localhost:3000/coupon/delete/:id here id is id of the coupon and paste access token in bearer section.
+
