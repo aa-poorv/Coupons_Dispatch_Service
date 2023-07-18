@@ -10,6 +10,7 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const createError = require("http-errors");
 const { verify } = require("jsonwebtoken");
+const { config } = require("dotenv");
 
 connectDB();
 
@@ -42,6 +43,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("Serving your app");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log("Serving your app at port " + PORT + "...");
 });

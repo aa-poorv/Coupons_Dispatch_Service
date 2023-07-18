@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const connectDB = () => {
-  mongoose.connect("mongodb://localhost:27017/userRegister", {
-    useNewUrlParser: true,
+  mongoose.connect(process.env.MONGODB_URI, {
+    dbName: process.env.DB_NAME,
   });
   var conn = mongoose.connection;
   conn.on("connected", function () {
